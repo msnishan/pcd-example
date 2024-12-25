@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    ports:
+      - "3306:3306" # Maps MySQL's default port to your local machine
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password # Root password
+      MYSQL_DATABASE: your_database_name # Database to be created
+      MYSQL_USER: user_name # Custom user
+      MYSQL_PASSWORD: user_password # Password for the custom user
+    volumes:
+      - mysql_data:/var/lib/mysql # Persist MySQL data
+
+volumes:
+  mysql_data:

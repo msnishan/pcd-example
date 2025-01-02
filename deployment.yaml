@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pcd-example-deployment
+  labels:
+    app: pcd-example
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pcd-example
+  template:
+    metadata:
+      labels:
+        app: pcd-example
+    spec:
+      containers:
+        - name: pcd-example-container
+          image: msnishan/pcd-example:latest
+          env:
+            - name: MYSQL_URL
+              value: "jdbc:mysql://cloud_sql_ip:3306/your_database_name"
+            - name: MYSQL_USERNAME
+              value: "cloud_sql_username"
+            - name: MYSQL_PASSWORD
+              value: "cloud_sql_password"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "mysql"

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pcd-configmap
+data:
+  SPRING_PROFILES_ACTIVE: "mysql"
+  MYSQL_URL: "jdbc:mysql://host.minikube.internal:3306/your_database_name"

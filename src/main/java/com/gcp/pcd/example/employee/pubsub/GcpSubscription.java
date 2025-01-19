@@ -1,5 +1,6 @@
 package com.gcp.pcd.example.employee.pubsub;
 
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.pubsub.v1.MessageReceiver;
 import com.google.cloud.pubsub.v1.Subscriber;
 import com.google.pubsub.v1.ProjectSubscriptionName;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
+import java.io.IOException;
 
 @Component
 @Profile("mysql")
@@ -32,7 +34,9 @@ public class GcpSubscription implements ApplicationRunner {
             subscriber = Subscriber.newBuilder(projectSubscriptionName, (MessageReceiver) (message, cons) -> {
                 LOGGER.info("message received {}", message.getData());
                 cons.ack();
-            }).build();
+            })
+            .setCredentialsProvider(GoogleCredentials::getApplicationDefault)
+            .build();
             subscriber.startAsync().awaitRunning();
             LOGGER.info("sub started");
         } finally {

@@ -1,5 +1,6 @@
 package com.gcp.pcd.example.employee.pubsub;
 
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.pubsub.v1.Publisher;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.PubsubMessage;
@@ -24,7 +25,9 @@ public class MessagePublisher {
     public void publishMessageToTopic(String topicId, String messageInString) {
         TopicName topicName = TopicName.of(gcpConfig.projectId, topicId);
         try {
-            Publisher publisher = Publisher.newBuilder(topicName).build();
+            Publisher publisher = Publisher.newBuilder(topicName)
+                    .setCredentialsProvider(GoogleCredentials::getApplicationDefault)
+                    .build();
             PubsubMessage message = PubsubMessage.newBuilder()
                     .setData(ByteString.copyFromUtf8(messageInString))
                     .build();

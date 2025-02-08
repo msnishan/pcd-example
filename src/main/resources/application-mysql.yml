@@ -13,3 +13,7 @@ gcp:
   project:
     id: ${GCP_PROJECT_ID}
     sub: ${GCP_SUB_ID}
+logging:
+  level:
+    root: INFO
+    com.google.cloud.pubsub: DEBUG

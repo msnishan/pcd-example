@@ -5,7 +5,7 @@ FROM eclipse-temurin:23-jdk
 WORKDIR /app
 
 # Copy the fat JAR into the container
-COPY build/libs/pcd-example-0.0.1-SNAPSHOT.jar /app/main.jar
+COPY build/libs/pcd-example-0.0.2-SNAPSHOT.jar /app/main.jar
 
 # Expose the application port (if applicable)
 EXPOSE 8080

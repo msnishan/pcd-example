@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.gcp.pcd'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 java {
 	toolchain {
@@ -20,7 +20,11 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.google.cloud:google-cloud-pubsub:1.136.0'
+
+
+	implementation platform('com.google.cloud:libraries-bom:26.52.0')
+	implementation 'com.google.cloud:google-cloud-pubsub'
+
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

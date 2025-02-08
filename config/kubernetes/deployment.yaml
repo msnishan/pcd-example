@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pcd-example-container
-          image: msnishan/pcd-example:latest
+          image: msnishan/pcd-example:0.0.2
           envFrom:
             - configMapRef:
                 name: pcd-configmap

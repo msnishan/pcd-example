@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Component
 @Profile("mysql")
@@ -39,7 +41,11 @@ public class GcpSubscription implements ApplicationRunner {
             .build();
             subscriber.startAsync().awaitRunning();
             LOGGER.info("sub started");
+            subscriber.awaitTerminated(3, TimeUnit.MINUTES);
+        } catch (TimeoutException e) {
+            throw new RuntimeException(e);
         } finally {
+            LOGGER.warn("sub closing");
             if (subscriber != null) {
                 subscriber.stopAsync();
             }
